@@ -5,6 +5,8 @@
 // farm plan beside each ranked protocol. No protocol name is ever special-cased: the same function
 // scores every row, the way the dashboard states it and the way this module computes it.
 
+import { buildSteps } from './playbook.ts';
+
 /** One protocol as the sealed snapshot carries it. */
 export interface SnapshotProtocol {
   slug: string;
@@ -267,6 +269,11 @@ function actionFor(p: SnapshotProtocol, capital: number, chain: string): string 
 }
 
 export function farmSteps(p: SnapshotProtocol, age: number | null): FarmStep[] {
+  return buildSteps(p, age);
+}
+
+/** The previous, shorter sequence is kept below as a fallback for a protocol with no category. */
+function legacyFarmSteps(p: SnapshotProtocol, age: number | null): FarmStep[] {
   const chain = chainOf(p);
   const capital = capitalFor(p);
   const hold = holdDaysFor(age);
