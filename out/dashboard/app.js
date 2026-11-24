@@ -267,7 +267,7 @@
         el('td', { class: 'num ' + (r.change_7d !== null && r.change_7d >= 0 ? 'pos' : 'neg'), text: fmtPct(r.change_7d) }),
         el('td', { class: 'num', text: fmtUsd(r.mcap_usd) }),
         el('td', null, el('span', { class: 'status', text: 'already trades' }))
-      );
+      ));
     });
     return el('div', { class: 'panel' },
       el('div', { class: 'table-wrap' },
